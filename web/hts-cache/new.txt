@@ -1,0 +1,5 @@
+date	size'/'remotesize	flags(request:Update,Range state:File response:Modified,Chunked,gZipped)	statuscode	status ('servermsg')	MIME	Etag|Date	URL	localfile	(from URL)
+13:47:01	379589/379589	---MCZ	200	added ('OK')	text/html	date:Thu,%2018%20Nov%202021%2010:47:01%20GMT	https://www.netflix.com/ru-en/login	www.netflix.com/ru-en/login.html	(from )
+13:47:02	1098/1098	---MCZ	-1	error ('Open%20error%20when%20decompressing%20(can%20not%20create%20temporary%20file%20/tmp0.z)')	text/plain	date:Thu,%2018%20Nov%202021%2010:47:01%20GMT	https://www.netflix.com/robots.txt		(from )
+13:47:02	0/0	---MC-	302	error ('Found')	text/html	date:Thu,%2018%20Nov%202021%2010:47:02%20GMT	https://www.netflix.com/ru-en/GET	www.netflix.com/ru-en/GET.1.delayed	(from https://www.netflix.com/ru-en/login)
+13:47:03	0/-1	---M--	302	error ('')			https://www.netflix.com/ru-en/GET	www.netflix.com/ru-en/GET.2.delayed	(from https://www.netflix.com/ru-en/login)
